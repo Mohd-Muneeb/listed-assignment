@@ -1,10 +1,22 @@
+import { signOut } from "firebase/auth";
 import React from "react";
+import { auth } from "~/config";
 
 const SearchBar = () => {
+	const handleSignOut = () => {
+		signOut(auth)
+			.then(() => {
+				console.log("Logout Success");
+			})
+			.catch(() => {
+				console.log("Error occured");
+			});
+	};
+
 	return (
 		<div className="flex w-full items-center justify-between">
 			<h1 className="text-2xl font-bold">Dashboard</h1>
-			<div className="flex gap-4 justify-center items-center">
+			<div className="flex items-center justify-center gap-8">
 				<input className="rounded-lg bg-white p-2" placeholder="Search..."></input>
 				<svg xmlns="http://www.w3.org/2000/svg" width="18" height="20" viewBox="0 0 18 20" fill="none">
 					<path
@@ -12,6 +24,9 @@ const SearchBar = () => {
 						fill="black"
 					/>
 				</svg>
+				<button title="Sign out button" className="group" onClick={() => handleSignOut()}>
+					<img src={auth.currentUser?.photoURL || "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWH8bZEkYpeo_CfQx4qOTiJwLqEHI5rE8dVBHqPpM&s"} className="w-[52px] rounded-full"></img>
+				</button>
 			</div>
 		</div>
 	);

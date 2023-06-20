@@ -1,15 +1,29 @@
 import Link from "next/link";
 import React from "react";
+import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 
 const Login = () => {
+	const provider = new GoogleAuthProvider();
+	const auth = getAuth();
+	const handleGoogleLogin = () => {
+		signInWithPopup(auth, provider)
+			.then((result) => {
+				console.log("logged in");
+			})
+			.catch((error) => {
+				const errorCode = error.code;
+				const errorMessage = error.message;
+			});
+	};
+
 	return (
-		<div className="flex w-full flex-col items-center justify-center">
+		<div className="flex w-full h-screen flex-col items-center justify-center">
 			<div>
 				<h1 className="my-2 text-4xl font-bold">Sign In</h1>
 				<h3>Sign in to your account</h3>
 
 				<div className="my-4 flex gap-4">
-					<button className="group flex h-8 items-center justify-center gap-2 rounded-[10px] bg-[#FFFFFF] p-2 text-sm">
+					<button onClick={() => handleGoogleLogin()} className="group flex h-8 items-center justify-center gap-2 rounded-[10px] bg-[#FFFFFF] p-2 text-sm">
 						<img
 							src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
 							className="h-4"

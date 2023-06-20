@@ -1,16 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import { Line } from "react-chartjs-2";
 import { Chart as ChartJS, LineElement, CategoryScale, LinearScale, PointElement } from "chart.js";
 
 ChartJS.register(LineElement, CategoryScale, LinearScale, PointElement);
 
-const MainGraph = () => {
+const MainGraph = ({ lineGraph }: any) => {
+
 	const data = {
 		labels: ["", "Week 1", "Week 2", "Week 3", "Week4", ""],
 		datasets: [
 			{
-				data: [100, 450, 175, 425, 150, 250],
+				data: lineGraph,
 				backgroundColor: "transparent",
 				borderColor: "#9BDD7C",
 				pointBorderColor: "transparent",
@@ -64,7 +65,7 @@ const MainGraph = () => {
 	};
 
 	return (
-		<div className="w-full rounded-[20px]  bg-white p-[2rem]">
+		<div className="w-full rounded-[20px] bg-white px-8 pb-2 pt-[2rem]">
 			<div className="flex items-end justify-between">
 				<div>
 					<h1 className="text-lg font-bold">Activities</h1>
@@ -92,7 +93,7 @@ const MainGraph = () => {
 				</div>
 			</div>
 			<div className="mt-4">
-				<div className="relative my-4 min-h-[30vh] w-full">
+				<div className="my-4 h-[27.5vh] w-full">
 					<Line data={data} options={options}></Line>
 				</div>
 			</div>
