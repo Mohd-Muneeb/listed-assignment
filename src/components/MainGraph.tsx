@@ -1,8 +1,70 @@
 import React from "react";
 
+import { Line } from "react-chartjs-2";
+import { Chart as ChartJS, LineElement, CategoryScale, LinearScale, PointElement } from "chart.js";
+
+ChartJS.register(LineElement, CategoryScale, LinearScale, PointElement);
+
 const MainGraph = () => {
+	const data = {
+		labels: ["", "Week 1", "Week 2", "Week 3", "Week4", ""],
+		datasets: [
+			{
+				data: [100, 450, 175, 425, 150, 250],
+				backgroundColor: "transparent",
+				borderColor: "#9BDD7C",
+				pointBorderColor: "transparent",
+				pointBorderWidth: 4,
+				tension: 0.4,
+			},
+			{
+				data: [130, 400, 195, 240, 350, 290],
+				backgroundColor: "transparent",
+				borderColor: "#E9A0A0",
+				pointBorderColor: "transparent",
+				pointBorderWidth: 4,
+				tension: 0.4,
+			},
+		],
+	};
+
+	const options = {
+		plugins: {
+			legend: {
+				display: false,
+			},
+		},
+		tooltips: {
+			callbacks: {
+				label: function (tooltipItem: any) {
+					return tooltipItem.yLabel;
+				},
+			},
+		},
+		responsive: true,
+		maintainAspectRatio: false,
+		scales: {
+			x: {
+				grid: {
+					display: false,
+				},
+			},
+			y: {
+				min: 0,
+				max: 500,
+				border: {
+					display: false,
+				},
+
+				ticks: {
+					stepSize: 100,
+				},
+			},
+		},
+	};
+
 	return (
-		<div className="w-full rounded-md  bg-white p-[2rem]">
+		<div className="w-full rounded-[20px]  bg-white p-[2rem]">
 			<div className="flex items-end justify-between">
 				<div>
 					<h1 className="text-lg font-bold">Activities</h1>
@@ -19,12 +81,20 @@ const MainGraph = () => {
 					</button>
 				</div>
 				<div className="flex gap-8">
-					<h1>Guest</h1>
-					<h1>User</h1>
+					<div className="flex items-center gap-2">
+						<div className="h-4 w-4 rounded-full bg-[#9BDD7C]">&nbsp;</div>
+						<h1>Guest</h1>
+					</div>
+					<div className="flex items-center gap-2">
+						<div className="h-4 w-4 rounded-full bg-[#E9A0A0]">&nbsp;</div>
+						<h1>User</h1>
+					</div>
 				</div>
 			</div>
 			<div className="mt-4">
-				<h1>The Graph</h1>
+				<div className="relative my-4 min-h-[30vh] w-full">
+					<Line data={data} options={options}></Line>
+				</div>
 			</div>
 		</div>
 	);

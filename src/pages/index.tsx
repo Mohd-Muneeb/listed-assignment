@@ -22,7 +22,7 @@ export default function Home() {
 					<SearchBar />
 					<StatusCardsContainer />
 					<MainGraph />
-					<div className="flex gap-4">
+					<div className="flex my-4 rounded-[40px] gap-4">
 						<PieGraph />
 						<Schedule />
 					</div>
