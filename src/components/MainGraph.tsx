@@ -5,23 +5,22 @@ import { Chart as ChartJS, LineElement, CategoryScale, LinearScale, PointElement
 
 ChartJS.register(LineElement, CategoryScale, LinearScale, PointElement);
 
-const MainGraph = ({ lineGraph }: any) => {
-
+const MainGraph = ({ GuestsLineGraph, GuestsLineColor, UsersLineColor, UsersLineGraph }: any) => {
 	const data = {
 		labels: ["", "Week 1", "Week 2", "Week 3", "Week4", ""],
 		datasets: [
 			{
-				data: lineGraph,
+				data: GuestsLineGraph,
 				backgroundColor: "transparent",
-				borderColor: "#9BDD7C",
+				borderColor: GuestsLineColor,
 				pointBorderColor: "transparent",
 				pointBorderWidth: 4,
 				tension: 0.4,
 			},
 			{
-				data: [130, 400, 195, 240, 350, 290],
+				data: UsersLineGraph,
 				backgroundColor: "transparent",
-				borderColor: "#E9A0A0",
+				borderColor: UsersLineColor,
 				pointBorderColor: "transparent",
 				pointBorderWidth: 4,
 				tension: 0.4,
