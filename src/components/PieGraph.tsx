@@ -5,11 +5,11 @@ import { ArcElement, Legend, Tooltip } from "chart.js";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-const PieGraph = () => {
+const PieGraph = ({ PieGraph }: any) => {
 	const data = {
 		datasets: [
 			{
-				data: [12, 5, 10],
+				data: PieGraph,
 				backgroundColor: ["#EE8484", "#F6DC7D", "#98D89E"],
 				borderWidth: 0,
 			},
@@ -23,7 +23,7 @@ const PieGraph = () => {
 	};
 
 	return (
-		<div className="rounded-[20px] max-h-full min-w-[480px] bg-white p-8">
+		<div className="max-h-full min-w-[480px] rounded-[20px] bg-white p-8">
 			<div className="flex items-center justify-between">
 				<h1 className="font-bold"> Top Products</h1>
 				<button className="flex items-center gap-2 text-sm opacity-70">
@@ -39,25 +39,25 @@ const PieGraph = () => {
 				</button>
 			</div>
 
-			<div className="flex items-center w-full justify-between p-4">
+			<div className="flex w-full items-center justify-between p-4">
 				<div style={{ height: "150px", width: "150px" }} className="flex items-center justify-start p-0">
 					<Pie data={data} options={option} />
 				</div>
 				<div className="flex flex-col justify-between  gap-8">
 					<div className="flex items-center gap-2 font-medium">
 						<div className="h-4 w-4 rounded-full bg-[#F6DC7D]">&nbsp;</div>
-						<h1 className="font-bold text-sm">Basic Tees</h1>
+						<h1 className="text-sm font-bold">Basic Tees</h1>
 					</div>
 
 					<div className="flex items-center gap-2 font-medium">
 						<div className="h-4 w-4 rounded-full bg-[#EE8484]">&nbsp;</div>
 						<div>
-							<h1 className="font-bold text-sm">Custom Short Pants</h1>
+							<h1 className="text-sm font-bold">Custom Short Pants</h1>
 						</div>
 					</div>
 					<div className="flex items-center gap-2">
 						<div className="h-4 w-4 rounded-full bg-[#9BDD7C]">&nbsp;</div>
-						<h1 className="font-bold text-sm">Super Hoodies</h1>
+						<h1 className="text-sm font-bold">Super Hoodies</h1>
 					</div>
 				</div>{" "}
 			</div>

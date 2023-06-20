@@ -9,14 +9,25 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "~/config";
 import Head from "next/head";
 import { useEffect, useState } from "react";
+import { ScheduleParser } from "~/functions";
 
-export default function Home({ lineGraph }: any) {
+export default function Home({ lineGraph, pieGraph, schedules }: any) {
 	const [user, loading] = useAuthState(auth);
+
+	// Line Graph State
 
 	const [GuestsLineGraph, setGuestsLineGraph] = useState<any[]>([100]);
 	const [GuestsLineColor, setGuestsLineColor] = useState("");
 	const [UsersLineGraph, setUsersLineGraph] = useState<any[]>([100]);
 	const [UsersLineColor, setUsersLineColor] = useState("");
+
+	// Pie Garph State
+
+	const [PieGraphData, setPieGraphData] = useState<any[]>([0, 0, 0]);
+
+	// Schedule State
+
+	const [ScheduleItems, setScheduleItems] = useState<any[]>([]);
 
 	useEffect(() => {
 		// Guests graph data parsing
@@ -32,6 +43,21 @@ export default function Home({ lineGraph }: any) {
 		const userState = tempUsers.map((elem: any) => elem.integerValue);
 		setUsersLineGraph(userState);
 		setUsersLineColor(lineGraph.fields.users.mapValue.fields.color.stringValue);
+
+		// Pie Graph data parsing
+
+		const tempPie = pieGraph.fields.data.arrayValue.values;
+		const pieState = tempPie.map((elem: any) => elem.doubleValue);
+		setPieGraphData(pieState);
+
+		// Schedule data parsing
+
+		const tempSchedule = schedules.fields.tasks.arrayValue.values;
+		const scheduleMaps = tempSchedule.map((elem: any) => {
+			return elem.mapValue;
+		});
+
+		setScheduleItems(ScheduleParser(scheduleMaps));
 	}, []);
 
 	const router = useRouter();
@@ -60,8 +86,8 @@ export default function Home({ lineGraph }: any) {
 							GuestsLineGraph={GuestsLineGraph}
 						/>
 						<div className="my-4 flex gap-[40px] rounded-[40px]">
-							<PieGraph />
-							<Schedule />
+							<PieGraph PieGraph={PieGraphData} />
+							<Schedule ScheduleItems={ScheduleItems} />
 						</div>
 					</div>
 				</main>
@@ -71,16 +97,31 @@ export default function Home({ lineGraph }: any) {
 }
 
 export async function getServerSideProps() {
-	const url =
+	const lineGraphUrl =
 		"https://firestore.googleapis.com/v1/projects/grocare-7442b/databases/(default)/documents/users/line-graph-data";
 
-	const data = await fetch(url).then((response) => {
+	const lineGraphData = await fetch(lineGraphUrl).then((response) => {
+		return response.json();
+	});
+
+	const pieGraphUrl =
+		"https://firestore.googleapis.com/v1/projects/grocare-7442b/databases/(default)/documents/users/pie-chart-graph";
+
+	const pieGraphData = await fetch(pieGraphUrl).then((response) => {
+		return response.json();
+	});
+	const schedulesUrl =
+		"https://firestore.googleapis.com/v1/projects/grocare-7442b/databases/(default)/documents/users/schedules";
+
+	const schedulesData = await fetch(schedulesUrl).then((response) => {
 		return response.json();
 	});
 
 	return {
 		props: {
-			lineGraph: data,
+			lineGraph: lineGraphData,
+			pieGraph: pieGraphData,
+			schedules: schedulesData,
 		},
 	};
 }

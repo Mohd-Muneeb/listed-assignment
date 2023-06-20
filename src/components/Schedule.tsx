@@ -1,7 +1,8 @@
 import React from "react";
 import ScheduleCard from "./ScheduleCard";
+import { type ScheduleItem } from "~/types";
 
-const Schedule = () => {
+const Schedule = ({ ScheduleItems }: any) => {
 	return (
 		<div className="w-[480px] rounded-[20px] bg-white p-8">
 			<div className="flex w-full justify-between">
@@ -21,8 +22,9 @@ const Schedule = () => {
 				</div>
 			</div>
 			<div className="my-4 flex flex-col gap-8">
-				<ScheduleCard />
-				<ScheduleCard />
+				{ScheduleItems.map((task: ScheduleItem) => {
+					return (<ScheduleCard task={task} />);
+				})}
 			</div>
 		</div>
 	);
