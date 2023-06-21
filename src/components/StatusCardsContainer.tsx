@@ -12,16 +12,16 @@ const StatusCardsContainer = () => {
 	useEffect(() => {
 		const values = [
 			{
-				image: socials,
-				color: "bg-[#DEE0EF]",
-				title: "Total Users",
-				Value: "892",
-			},
-			{
 				image: payment,
 				color: "bg-[#DDEFE0]",
 				title: "Total Revenues",
 				Value: "$2,129,430",
+			},
+			{
+				image: tag,
+				color: "bg-[#F4ECDD]",
+				title: "Total Transactions",
+				Value: "1,520",
 			},
 			{
 				image: like,
@@ -30,10 +30,10 @@ const StatusCardsContainer = () => {
 				Value: "9,721",
 			},
 			{
-				image: tag,
-				color: "bg-[#F4ECDD]",
-				title: "Total Transactions",
-				Value: "1,520",
+				image: socials,
+				color: "bg-[#DEE0EF]",
+				title: "Total Users",
+				Value: "892",
 			},
 		];
 
