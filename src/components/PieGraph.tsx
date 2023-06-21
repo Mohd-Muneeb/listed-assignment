@@ -43,8 +43,8 @@ const PieGraph = ({ PieGraph }: any) => {
 				<div style={{ height: "150px", width: "150px" }} className="flex items-center justify-start p-0">
 					<Pie data={data} options={option} />
 				</div>
-				<div className="flex flex-col justify-between  gap-8">
-					<div className="flex items-center gap-2 font-medium">
+				<div className="flex flex-col justify-between  gap-4">
+					{/* <div className="flex items-center gap-2 font-medium">
 						<div className="h-4 w-4 rounded-full bg-[#F6DC7D]">&nbsp;</div>
 						<h1 className="text-sm font-bold">Basic Tees</h1>
 					</div>
@@ -54,10 +54,42 @@ const PieGraph = ({ PieGraph }: any) => {
 						<div>
 							<h1 className="text-sm font-bold">Custom Short Pants</h1>
 						</div>
+					</div> */}
+
+					<div>
+						<div className="flex items-center gap-4">
+							<div className="h-[11px] w-[11px] rounded-full bg-[#F6DC7D]">&nbsp;</div>
+							<h1 className="text-sm font-bold">Basic Tees</h1>
+						</div>
+						<div className="flex gap-4 mt-1">
+							<div className="h-[11px] w-[11px]">&nbsp;</div>
+
+							<p className="text-xs">{(PieGraph[0] / (PieGraph[0] + PieGraph[1] + PieGraph[2])) * 100} %</p>
+						</div>
 					</div>
-					<div className="flex items-center gap-2">
-						<div className="h-4 w-4 rounded-full bg-[#9BDD7C]">&nbsp;</div>
-						<h1 className="text-sm font-bold">Super Hoodies</h1>
+
+					<div>
+						<div className="flex items-center gap-4">
+							<div className="h-[11px] w-[11px] rounded-full bg-[#EE8484]">&nbsp;</div>
+							<h1 className="text-sm font-bold">Custom Short Pants</h1>
+						</div>
+						<div className="flex gap-4 mt-1">
+							<div className="h-[11px] w-[11px]">&nbsp;</div>
+
+							<p className="text-xs">{(PieGraph[1] / (PieGraph[0] + PieGraph[1] + PieGraph[2])) * 100} %</p>
+						</div>
+					</div>
+
+					<div>
+						<div className="flex items-center gap-4">
+							<div className="h-[11px] w-[11px] rounded-full bg-[#9BDD7C]">&nbsp;</div>
+							<h1 className="text-sm font-bold">Super Hoodies</h1>
+						</div>
+						<div className="flex gap-4 mt-1">
+							<div className="h-[11px] w-[11px]">&nbsp;</div>
+
+							<p className="text-xs">{(PieGraph[2] / (PieGraph[0] + PieGraph[1] + PieGraph[2])) * 100} %</p>
+						</div>
 					</div>
 				</div>{" "}
 			</div>
