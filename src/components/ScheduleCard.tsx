@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 
 const ScheduleCard = ({ task }: any) => {
 	return (
 		<div className="flex items-center gap-4">
-			<div className={`h-[3.5rem] ${task.color}`}>
+			<div className={`h-[3.5rem]`} style={{backgroundColor: task.color}}>
 				&nbsp;
 				<br />
 				&nbsp;
